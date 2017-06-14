@@ -1,0 +1,28 @@
+Q4: 
+CREATE TABLE business(business_id text PRIMARY KEY, address text, category text) ;
+
+COPY business (business_id, address, category) FROM '/home/hduser/dataset/business.csv' WITH DELIMITER = '^';
+
+SELECT * FROM business WHERE business_id='HPWmjuivv3xJ279qSVfNaQ';
+
+TRUNCATE business;
+
+DROP TABLE business;
+
+————————————————————————
+Q5: 
+CREATE TABLE review(review_id text,user_id text, business_id text, stars float, PRIMARY KEY(business_id, stars));
+
+COPY review (review_id, user_id, business_id, stars) FROM '/home/hduser/dataset/review.csv' WITH DELIMITER = '^';
+
+CREATE INDEX review_stars ON review(stars);
+
+SELECT * FROM review WHERE stars=4.0 LIMIT 10;
+
+TRUNCATE review;
+
+DROP TABLE review;
+
+———————————————————————————
+Q6:
+hduser@instance-2:~$ sudo nodetool status
